@@ -4,13 +4,12 @@ Inherits Button
 
 Public Pending As Integer
 
-Public Sub _new()
+Public Sub _new(x As Integer, y As Integer)
 
-  Me.Width = Me.Parent.Width / 4
-  Me.Height = Me.Parent.Height / 4
-  Me.Font.size = Me.Height / 4
-  Me.Text = 2 'Rand(1, 2) * 2
-  Me.Background = Color.Cyan
+  Me.Text = Rand(1, 2) * 2
+  Me.SetSize
+  Me.SetCords(x, y)
+  Me.SetColor
 
 End
 
@@ -21,17 +20,84 @@ Public Sub SetCords(x As Integer, y As Integer)
 
 End
 
-Public Sub Smash(Other As Tile)
+Public Function IsCords(x As Integer, y As Integer) As Boolean
+
+  Return Me.x / Me.Width = x And Me.Y / Me.Height = y
+
+End
+
+Public Function Smash(Other As Tile) As Boolean
 
   If Me.Text = Other.Text And If Me.Pending = 0 And Other.Pending = 0 Then
     Me.Pending = CInt(Other.text)
     Other.Delete
+    Return True
+  Else
+    Return False
   Endif
 
-End Sub
+End
 
 Public Sub ApplyPending()
 
-  Me.Text = CInt(Me.Text) + Me.Pending
+  If Me.Pending > 0
+    Me.Text = CInt(Me.Text) + Me.Pending
+    Me.Pending = 0
+    Me.SetColor
+  End If
+
+End
+
+Public Sub SetSize()
+
+  Me.Width = Me.Parent.Width / 4
+  Me.Height = Me.Parent.Height / 4
+
+  If Me.Width <= Me.Height Then
+    Me.Font.size = Me.Width / 4
+  Else
+    Me.Font.size = Me.Height / 4
+  Endif
+
+End
+
+Public Sub ChangeSize()
+
+  Dim x As Integer = Me.x / Me.Width
+  Dim y As Integer = Me.y / Me.Height
+
+  Me.SetSize
+  Me.SetCords(x, y)
+
+End
+
+Public Sub SetColor()
+
+  Select Case CInt(Me.text)
+    Case 2
+      Me.Background = Color.Yellow
+    Case 4
+      Me.Background = Color.Green
+    Case 8
+      Me.Background = Color.Blue
+    Case 16
+      Me.Background = Color.Pink
+    Case 32
+      Me.Background = Color.Red
+    Case 64
+      Me.Background = Color.Cyan
+    Case 128
+      Me.Background = Color.DarkYellow
+    Case 256
+      Me.Background = Color.DarkMagenta
+    Case 512
+      Me.Background = Color.Green
+    Case 1024
+      Me.Background = Color.Orange
+    Case 2048
+      Me.Background = Color.Violet
+    Case Else
+      Me.Background = Color.White
+  End Select
 
 End

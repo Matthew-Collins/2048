@@ -1,3 +1,6 @@
+[Bookmarks]
+FMain=[]
+
 [Breakpoints]
 Count=0
 
@@ -8,13 +11,22 @@ Count=0
 Geometry=[728,372,224,280]
 
 [DebugWindow/Me.Children]
-Geometry=[0,13,224,280]
+Geometry=[1593,3,224,280]
+
+[DebugWindow/Me.Children[0]]
+Geometry=[1607,17,224,922]
+
+[DebugWindow/Me.Children[1]]
+Geometry=[1607,17,224,943]
 
 [DebugWindow/Me.Controls]
 Geometry=[0,13,224,280]
 
 [DebugWindow/xTile]
 Geometry=[0,13,224,870]
+
+[Executable]
+Path="2048.gambas"
 
 [OpenFile]
 Count=0

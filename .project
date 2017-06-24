@@ -2,7 +2,7 @@
 # Compiled with Gambas 3.9.2
 Title=2048
 Startup=FMain
-Version=0.0.1
+Version=0.0.2
 Component=gb.image
 Component=gb.gtk3
 Component=gb.form
