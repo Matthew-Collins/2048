@@ -1,0 +1,37 @@
+' Gambas class file
+
+Inherits Button
+
+Public Pending As Integer
+
+Public Sub _new()
+
+  Me.Width = Me.Parent.Width / 4
+  Me.Height = Me.Parent.Height / 4
+  Me.Font.size = Me.Height / 4
+  Me.Text = 2 'Rand(1, 2) * 2
+  Me.Background = Color.Cyan
+
+End
+
+Public Sub SetCords(x As Integer, y As Integer)
+
+  Me.x = x * Me.Width
+  Me.y = y * Me.Height
+
+End
+
+Public Sub Smash(Other As Tile)
+
+  If Me.Text = Other.Text And If Me.Pending = 0 And Other.Pending = 0 Then
+    Me.Pending = CInt(Other.text)
+    Other.Delete
+  Endif
+
+End Sub
+
+Public Sub ApplyPending()
+
+  Me.Text = CInt(Me.Text) + Me.Pending
+
+End

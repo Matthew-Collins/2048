@@ -1,0 +1,53 @@
+' Gambas class file
+
+Public Tile1 As Tile
+Public Tile2 As Tile
+Public Tile3 As Tile
+Public Tile4 As Tile
+
+Public Sub Form_Open()
+
+  Tile1 = New Tile(Me)
+  Tile2 = New Tile(Me)
+  Tile3 = New Tile(Me)
+  Tile4 = New Tile(Me)
+
+  Tile3.Text = 4
+
+  Tile1.SetCords(0, 0)
+  Tile2.SetCords(0, 3)
+  Tile3.SetCords(3, 0)
+  Tile4.SetCords(3, 3)
+
+End
+
+Public Sub Form_KeyPress()
+
+  Select Case Key.Code
+    Case Key.Up
+      Tile1.Smash(Tile2)
+      Tile3.Smash(Tile4)
+    Case Key.Down
+      Tile2.Smash(Tile1)
+      Tile4.Smash(Tile3)
+    Case Key.Left
+      Tile1.Smash(Tile3)
+      Tile2.Smash(Tile4)
+    Case Key.Right
+      Tile3.Smash(Tile1)
+      Tile4.Smash(Tile2)
+  End Select
+
+  Me.ApplyPendings()
+
+End
+
+Public Sub ApplyPendings()
+
+  Dim Tile As Tile
+
+  For Each Tile In Me.Children
+    Tile.ApplyPending()
+  Next
+
+End
